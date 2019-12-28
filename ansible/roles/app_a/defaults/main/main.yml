@@ -1,0 +1,3 @@
+# file: roles/app_a/defaults/main/main.yml
+
+app_a_var: foo

@@ -1,0 +1,7 @@
+---
+# file: roles/app_a/tasks/main.yml
+
+- debug:
+    msg: |
+      app_a_var -> {{ app_a_var  }}
+      app_a_other_var -> {{ app_a_other_var  }}

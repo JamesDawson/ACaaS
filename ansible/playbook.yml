@@ -1,0 +1,15 @@
+---
+# file: playbook.yml
+
+- hosts: all
+  connection: local
+  gather_facts: no
+
+  roles:
+  - app_a
+
+  tasks:
+  - debug:
+      msg: |
+        org_name       -> {{ org_name }}
+        org_name_short -> {{ org_name_short }}

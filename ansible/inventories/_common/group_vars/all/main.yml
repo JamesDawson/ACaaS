@@ -1,0 +1,5 @@
+---
+# file: inventories/_common/group_vars/all/main.yml
+
+org_name: acmecorp
+org_name_short: ac

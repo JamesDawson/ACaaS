@@ -1,0 +1,3 @@
+# file: roles/app_a/defaults/main/other.yml
+
+app_a_other_var: bar
