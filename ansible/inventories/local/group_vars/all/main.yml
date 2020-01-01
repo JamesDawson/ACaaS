@@ -1,0 +1,4 @@
+---
+# file: inventories/local/group_vars/all/main.yml
+
+environment_name: local
