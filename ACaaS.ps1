@@ -1,7 +1,8 @@
 [CmdletBinding()]
 param
 (
-    [array] $inventories
+  [string] $ansibleRoot,
+  [array] $inventories
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 3
@@ -51,7 +52,7 @@ $outputFilename = "{0}.json" -f $id
 $containerName = "acaas-$id"
 
 $ansibleCmd = Get-AnsibleCmd $outputFilename $inventories
-$dockerRunCmd = Get-DockerRunCmd $containerName $here $ansibleCmd
+$dockerRunCmd = Get-DockerRunCmd $containerName $ansibleRoot $ansibleCmd
 Write-Verbose "$dockerRunCmd"
 
 Invoke-Expression ($dockerRunCmd -join " ") | & $outputSink

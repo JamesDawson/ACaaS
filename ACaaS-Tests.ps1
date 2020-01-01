@@ -1,10 +1,12 @@
 $here = Split-Path -Parent $PSCommandPath
 $sut = "$here/ACaaS.ps1"
 
+$ansiblePath = "$here/ansible"
+
 Describe 'ACaaS Tests' {
 
     Context 'No inventories' {
-        $res = & $sut
+        $res = & $sut -ansibleRoot $ansiblePath
 
         It 'Returns nothing due to skipped play (no matching hosts)' {
             $res | Should -Be $null
@@ -12,7 +14,7 @@ Describe 'ACaaS Tests' {
     }
 
     Context 'Single inventory: _common' {
-        $res = & $sut -inventories @('inventories/_common')
+        $res = & $sut -ansibleRoot $ansiblePath -inventories @('inventories/_common')
 
         It 'Returns the correct default values' {
             $res.org_name | Should -Be 'acmecorp'
@@ -28,7 +30,7 @@ Describe 'ACaaS Tests' {
             "inventories/_common"
             "inventories/local"
         )
-        $res = & $sut -inventories $inventories
+        $res = & $sut -ansibleRoot $ansiblePath -inventories $inventories
 
         It 'Returns the correct environment-specific values' {
             # values from '_common'
