@@ -11,5 +11,9 @@
   tasks:
   - debug:
       msg: |
-        org_name       -> {{ org_name }}
-        org_name_short -> {{ org_name_short }}
+        {{ vars | to_nice_json }}
+      verbosity: 2
+
+  - copy:
+      dest: /tmp/{{ out_file }}
+      content: "{{ vars | to_nice_json }}"
