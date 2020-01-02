@@ -2,7 +2,8 @@
 param
 (
   [string] $ansibleRoot,
-  [array] $inventories
+  [array] $inventories,
+  [array] $limits
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 3
@@ -11,7 +12,7 @@ $here = (Split-Path -Parent $PSCommandPath).Replace("\","/")
 $inVerboseMode = $VerbosePreference -ne [System.Management.Automation.ActionPreference]::SilentlyContinue
 $outputSink = if ($inVerboseMode) {'Out-Default'} else {'Out-Null'}
 
-function Get-AnsibleCmd($outFile, $inventories)
+function Get-AnsibleCmd($outFile, $inventories, $limits)
 {
   $cmd = @(
     "ansible-playbook"
@@ -22,6 +23,11 @@ function Get-AnsibleCmd($outFile, $inventories)
   foreach ($i in $inventories)
   {
     $cmd += "-i $i"
+  }
+
+  foreach ($l in $limits)
+  {
+    $cmd += "-l $l"
   }
 
   if ($inVerboseMode)

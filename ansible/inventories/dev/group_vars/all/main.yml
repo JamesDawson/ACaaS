@@ -2,3 +2,4 @@
 # file: inventories/dev/group_vars/all/main.yml
 
 environment_name: dev
+app_a_other_var: bar-dev
